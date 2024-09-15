@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmer.Net", "Elmer.Net\Elmer.Net.csproj", "{4D306AD5-4F65-41FC-B489-75DCE4B3EDB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmer.Net.Sample", "Elmer.Net.Sample\Elmer.Net.Sample.csproj", "{1B50EC82-8125-42A4-ABEF-9DB7B3021F05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D306AD5-4F65-41FC-B489-75DCE4B3EDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D306AD5-4F65-41FC-B489-75DCE4B3EDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D306AD5-4F65-41FC-B489-75DCE4B3EDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D306AD5-4F65-41FC-B489-75DCE4B3EDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B50EC82-8125-42A4-ABEF-9DB7B3021F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B50EC82-8125-42A4-ABEF-9DB7B3021F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B50EC82-8125-42A4-ABEF-9DB7B3021F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B50EC82-8125-42A4-ABEF-9DB7B3021F05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB1BEDC6-F930-4F73-88A1-E5AA85CA2162}
+	EndGlobalSection
+EndGlobal
