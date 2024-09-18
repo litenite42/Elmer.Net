@@ -1,8 +1,9 @@
-﻿namespace Elmer.Net.Areas.reCAPTCHA.Core
+﻿namespace Elmer.Net.Core
 {
     public class ReCaptchaApiRequest : IReCaptchaApiRequest
     {
-        public ReCaptchaApiRequest() {
+        public ReCaptchaApiRequest()
+        {
 
             Response = "";
             Secret = "";

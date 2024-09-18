@@ -1,4 +1,4 @@
-﻿namespace Elmer.Net.Areas.reCAPTCHA.Core
+﻿namespace Elmer.Net.Core
 {
     /// <summary>
     /// Defines the properties necessary to process reCAPTCHA requests server-side

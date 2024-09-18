@@ -3,11 +3,11 @@
 */
 class RecaptchaElements {
     /*
-        Form Element to assess user interaction of
+        Form Element Selector to assess user interaction of
     */
     Form;
     /*
-        Submit Button to watch for click event
+        Submit Button Selector to watch for click event
     */
     Submit;
     constructor(object) {
@@ -27,10 +27,10 @@ class ReCaptchaConfiguration {
         const { action, post, before, fail, always } = { ...object };
 
         this.Action = action || console.debug('Missing action name. Defaulting to "genericSubmit"') || 'genericSubmit';
-        this.Post = post || (() => console.debug('Logic to submit to backend for verification missing.'));
-        this.Before = before || (() => console.debug('Optional Logic before submitting form to application missing; note this is to application and not reCAPTCHA'));
-        this.Fail = fail || (() => console.debug('Optional logic to handle failed submission to application missing; note this is to the application and not reCAPTCHA'));
-        this.Always = always || (() => console.debug('Optional logic to clean up all requests sent to the application.'))
+        this.Post = post || console.debug('Logic to submit to backend for verification missing.');
+        this.Before = before ||  console.debug('Optional Logic before submitting form to application missing; note this is to application and not reCAPTCHA');
+        this.Fail = fail || console.debug('Optional logic to handle failed submission to application missing; note this is to the application and not reCAPTCHA');
+        this.Always = always || console.debug('Optional logic to clean up all requests sent to the application.');
     }
 }
 
@@ -41,7 +41,7 @@ class Elmer {
         this.#elem = elements;
         this.#cfg = configuration;
 
-        if (!elements) { 
+        if (!elements) {
             elements = new RecaptchaElements();
         }
 
@@ -55,14 +55,18 @@ class Elmer {
             event.stopPropagation();
 
             const data = elements.Submit.dataset;
-
+            const _this = this;
             grecaptcha.ready(function () {
                 grecaptcha.execute(data.siteKey, { action: configuration.Action }).then(async function (token) {
-                    configuration.Before();
+                    configuration.Before && configuration.Before();
                     // Add your logic to submit to your backend server here.
                     const response = await fetch(data.verifyUrl, {
                         method: 'post',
-                        body: { response: token, secret: data.siteKey }
+                        body: JSON.stringify({ response: token, secret: data.siteKey }),
+                        headers: {
+                            'Accept': 'application/json; charset=utf-8',
+                            'Content-Type': 'application/json;charset=UTF-8'
+                        }
                     });
 
                     if (!response.ok) {
@@ -70,22 +74,22 @@ class Elmer {
                         return;
                     }
 
-                    const content = response.json();
+                    const content = await response.json();
 
                     if (configuration.Post) {
                         configuration.Post(content);
                     } else {
-                        this.Handle(content);
+                        _this.Handle(content, configuration.Action);
                     }
 
-                    configuration.Always();
+                    configuration.Always && configuration.Always();
                 });
             });
         });
     }
 
-    Handle(content) {
-        if (!Elemer.Interpret(content, configuration.Action)) {
+    Handle(content, actionName) {
+        if (!Elmer.Interpret(content, actionName)) {
             console.error('User Interaction Assessment failed.');
             return;
         }

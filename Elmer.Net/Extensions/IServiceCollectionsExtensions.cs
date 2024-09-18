@@ -1,8 +1,8 @@
-﻿using Elmer.Net.Areas.reCAPTCHA.Core;
+﻿using Elmer.Net.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Elmer.Net.Areas.reCAPTCHA.Extensions
+namespace Elmer.Net.Extensions
 {
     /// <summary>
     /// Extends IServiceCollection to add reCAPTCHA necessary functionality

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Elmer.Net.CustomTagHelpers
 {
-    public class SubmitButtonTagHelper(IReCaptchaApi _api) : TagHelper
+    public class IncludeRecaptchaTagHelper(IReCaptchaApi _api) : TagHelper
     {
         public override void Init(TagHelperContext context)
         {
@@ -19,13 +19,10 @@ namespace Elmer.Net.CustomTagHelpers
 
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            output.TagName = "button";
+            output.TagName = "script";
 
-            output.Attributes.SetAttribute("class", "btn btn-primary elmer-btn");
-            output.Attributes.Add("data-verify-url", _api.VerifyUrl);
-            output.Attributes.Add("data-site-key", _api.SiteKey);
+            output.Attributes.Add("src", $"https://www.google.com/recaptcha/api.js?render={_api.SiteKey}");
 
-            output.Content.Append("Submit");
             return base.ProcessAsync(context, output);
         }
     }

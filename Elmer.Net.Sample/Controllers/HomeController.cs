@@ -15,9 +15,8 @@ namespace Elmer.Net.Sample.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToActionPermanent("Create", "Courses");
         }
-
         public IActionResult Privacy()
         {
             return View();

@@ -1,4 +1,4 @@
-﻿namespace Elmer.Net.Areas.reCAPTCHA.Core
+﻿namespace Elmer.Net.Core
 {
     public interface IReCaptchaApiRequest
     {
