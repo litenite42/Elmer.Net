@@ -1,0 +1,53 @@
+name: Build and Release .NET 8 RCL
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # Specify .NET 8 version
+
+      - name: Restore dependencies
+        run: dotnet restore Elmer.Net
+
+      - name: Build
+        run: dotnet build Elmer.Net --configuration Release --no-restore
+
+      - name: Pack
+        run: dotnet pack Elmer.Net --configuration Release --no-build --output ./nupkg
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          body: |
+            Changes in this release:
+            - Feature 1
+            - Feature 2
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./nupkg/*.nupkg
+          asset_name: my-library.nupkg
+          asset_content_type: application/zip
