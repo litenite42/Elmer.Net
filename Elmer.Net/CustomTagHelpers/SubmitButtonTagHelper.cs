@@ -20,7 +20,6 @@ namespace Elmer.Net.CustomTagHelpers
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "button";
-
             output.Attributes.SetAttribute("class", "btn btn-primary elmer-btn");
             output.Attributes.Add("data-verify-url", _api.VerifyUrl);
             output.Attributes.Add("data-site-key", _api.SiteKey);
